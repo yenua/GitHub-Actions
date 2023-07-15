@@ -17,12 +17,11 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Display Python version
-        run: python -c "import sys; print(sys.version)"
+        run: python -c "import sys; f = open('version.txt', 'a'); f.write(sys.version); f.close()"
       - name : Create artifact
         run: |
-          touch artifact.txt
-          value=`cat artifact.txt`
-          echo "$value \${{ matrix.python-version }}" > artifact.txt
+          value=`cat version.txt`
+          echo $value > artifact.txt
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
