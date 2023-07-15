@@ -18,3 +18,10 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Display Python version
         run: python -c "import sys; print(sys.version)"
+      - name : Create artifact
+        run: echo ${{ matrix.python-version }} > artifact.txt
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: artifact.txt
