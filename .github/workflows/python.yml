@@ -20,8 +20,9 @@ jobs:
         run: python -c "import sys; print(sys.version)"
       - name : Create artifact
         run: |
+          touch artifact.txt
           value=`cat artifact.txt`
-          echo "$value ${{ matrix.python-version }}" > artifact.txt
+          echo "$value \${{ matrix.python-version }}" > artifact.txt
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
